@@ -1,5 +1,8 @@
-This is Python version 3.7.4 candidate 1+
+This is Python version 3.7.4 candidate 1+ (Fork for ios)
 =========================================
+
+PATH="$(pwd)/cross-gcc:$PATH" CONFIG_SITE=config.site make
+cpython PATH="$(pwd)/cross-gcc:$PATH" CONFIG_SITE=config.site ./configure --host aarch64-apple-darwin18.6.0 --build aarch64 --disable-ipv6
 
 .. image:: https://travis-ci.org/python/cpython.svg?branch=master
    :alt: CPython build status on Travis CI

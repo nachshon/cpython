@@ -20,6 +20,10 @@
 #  pragma weak statvfs
 #  pragma weak fstatvfs
 
+#include <sys/types.h>
+#include <sys/socket.h>
+#include <sys/uio.h>
+
 #endif /* __APPLE__ */
 
 #define PY_SSIZE_T_CLEAN
@@ -4220,9 +4224,14 @@ os_system_impl(PyObject *module, PyObject *command)
 {
     long result;
     const char *bytes = PyBytes_AsString(command);
+    #if defined(__APPLE__) && defined(__arm64__)
+    PyErr_SetString(PyExc_OverflowError, "path too long");
+    result = -1;
+    #else 
     Py_BEGIN_ALLOW_THREADS
     result = system(bytes);
     Py_END_ALLOW_THREADS
+    #endif
     return result;
 }
 #endif

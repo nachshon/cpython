@@ -379,6 +379,9 @@ then
 	*-*-cygwin*)
 		ac_sys_system=Cygwin
 		;;
+  *-*-darwin*)
+		ac_sys_system=Darwin
+		;;
 	*)
 		# for now, limit cross builds to known configurations
 		MACHDEP="unknown"
@@ -415,6 +418,15 @@ if test "$cross_compiling" = yes; then
 		case "$host_cpu" in
 		arm*)
 			_host_cpu=arm
+			;;
+		*)
+			_host_cpu=$host_cpu
+		esac
+		;;
+  *-*-darwin*)
+		case "$host_cpu" in
+		aarch64*)
+			_host_cpu=aarch64
 			;;
 		*)
 			_host_cpu=$host_cpu
@@ -1200,15 +1212,15 @@ then
         ARFLAGS="rcs"
 fi
 
-AC_CHECK_TOOLS([READELF], [readelf], [:])
-if test "$cross_compiling" = yes; then
-    case "$READELF" in
-	readelf|:)
-	AC_MSG_ERROR([readelf for the host is required for cross builds])
-	;;
-    esac
-fi
-AC_SUBST(READELF)
+#AC_CHECK_TOOLS([READELF], [readelf], [:])
+#if test "$cross_compiling" = yes; then
+#    case "$READELF" in
+#	readelf|:)
+#	AC_MSG_ERROR([readelf for the host is required for cross builds])
+#	;;
+#    esac
+#fi
+#AC_SUBST(READELF)
 
 
 case $MACHDEP in

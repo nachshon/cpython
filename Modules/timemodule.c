@@ -53,6 +53,9 @@
 /* Forward declarations */
 static int pysleep(_PyTime_t);
 
+#if defined(__APPLE__) && defined(__arm64__)
+#undef HAVE_CLOCK_SETTIME
+#endif
 
 static PyObject*
 _PyFloat_FromPyTime(_PyTime_t t)

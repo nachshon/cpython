@@ -20,6 +20,7 @@
 #  endif
 #endif
 
+int getentropy(void *buf, size_t buflen);
 #ifdef _Py_MEMORY_SANITIZER
 #  include <sanitizer/msan_interface.h>
 #endif

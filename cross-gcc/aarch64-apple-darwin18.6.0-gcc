@@ -1,0 +1,2 @@
+#! /bin/sh
+xcrun clang -arch arm64 -isysroot $(xcrun --show-sdk-path --sdk iphoneos) -mios-version-min=11.0 "$@"
